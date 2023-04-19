@@ -71,6 +71,8 @@ class BaseSpider(object):
         Returns:
             str: 获取到的网站HTML代码
         """
+        # Remove DSS in DEFAULT_CIPHERS
+        requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ECDHE+AESGCM:ECDHE+CHACHA20:DHE+AESGCM:DHE+CHACHA20:ECDH+AESGCM:DH+AESGCM:ECDH+AES:DH+AES:RSA+AESGCM:RSA+AES:!aNULL:!eNULL:!MD5'
         response = requests.get(url, headers=self.headers, proxies=proxies)
         if encoding:
             response.encoding = encoding
